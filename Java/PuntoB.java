@@ -4,8 +4,8 @@ public class PuntoB {
         /*
      * Nombres de los archivos de lectura y escritura, modifique como considere.
      */
-    static String ARCHIVO_LECTURA = "inB";
-    static String ARCHIVO_ESCRITURA = "outB";
+    static String ARCHIVO_LECTURA = "EntradaB";
+    static String ARCHIVO_ESCRITURA = "SalidaB";
     /*
      * Método para realizar la lectura del problema, no modificar.
      */
@@ -74,27 +74,33 @@ public class PuntoB {
      */
     static Respuesta solve(int n,int m, Libro [] libros){
 
-        int mm = 0; // Suma de todas las paginas de los libros
-        int mn = 0; // promedio de paginas por todos los libros 
-        n=0;// cantidad de escritores
-        int e = mm/n; // al resultado tenemos que aplicarle la funcion piso para saber las paginas en numeros enteros
-        int d = mm - (e * n);
+        int sumaPaginas = 0; 
+        int dias = 0;
+        for (int i = 0; i < libros.length; i++) {
+            sumaPaginas += libros[i].paginas; // Suma de todas las paginas de los libros
+        };     
 
         while(true){     
 
-        if(mm >= n ){
+        int ppe = sumaPaginas/n; // paginas por escritor
+        
+        int ps = sumaPaginas - (ppe * n); // paginas sobrantes
 
-            if(d == 0){
-                return new Respuesta(e, new String[0], new String[0]); // cantidad de dias que se demoran los escritores
+        if(sumaPaginas >= n ){
+
+            dias += ppe; 
+
+            if(ps == 0){
+                return new Respuesta(dias, new String[0], new String[0]);
             }else{
-                e = d/n; // hacer funcion piso para tomar la parte entera
+                ppe = ps/n;
             }
 
         // si la cantidad de paginas es menor que los escritores entonces
         }else{
 
         // pensar en retornar esto
-            return new Respuesta(e+1, new String[0], new String[0]);
+            return new Respuesta(dias+1, new String[0], new String[0]);
             /* if(mm*2 == n ){
                 int e = mm/mm*2
             }else if(){
@@ -106,11 +112,28 @@ public class PuntoB {
         }
         //return new Respuesta(0, new String[0], new String[0]);
     }
+
     public static void main(String[]args){
         Entrada input = input();
         Respuesta r = solve(input.n, input.m, input.libros);
         output(r);
+
     }
+
+    /* Entrada de ejemplo
+5 10 (5 - Escritores // 10 - libros)
+
+Libro1 10
+Libro2 4
+Libro3 9
+Libro4 3
+Libro5 11
+Libro6 7
+Libro7 2
+Libro8 22
+Libro9 15
+Libro10 6
+ */
 
     static class Entrada{
         int n;
