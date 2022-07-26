@@ -68,6 +68,17 @@ public class PuntoB {
         }
     }
 
+    static class EscritorP
+    {
+        int primerLibro;
+        int ultimoLibro;
+        EscritorP(int primerLibro, int ultimoLibro)
+        {
+            this.primerLibro = primerLibro;
+            this.ultimoLibro = ultimoLibro;
+        }
+    }
+
     /*
      * Implementar el algoritmo y devolver un objeto de tipo Respuesta, el cual servirá
      * para imprimir la solución al problema como se requiere en el enunciado.
@@ -78,39 +89,37 @@ public class PuntoB {
         int dias = 0;
         for (int i = 0; i < libros.length; i++) {
             sumaPaginas += libros[i].paginas; // Suma de todas las paginas de los libros
-        };     
-
-        while(true){     
-
+        }  
         int ppe = sumaPaginas/n; // paginas por escritor
-        
-        int ps = sumaPaginas - (ppe * n); // paginas sobrantes
+        int escritor[];   
+        escritor = new int[n];
+        EscritorP[] arr;
+        arr = new EscritorP[n];
 
-        if(sumaPaginas >= n ){
+        int ultimolibro=0; // 
+        for (int i = 0; i < n; i++) {
+            escritor[i] = ppe;
+        }
 
-            dias += ppe; 
+        while(true){
 
-            if(ps == 0){
-                return new Respuesta(dias, new String[0], new String[0]);
-            }else{
-                ppe = ps/n;
+            if(sumaPaginas <= n ){
+                return new Respuesta(1, new String[0], new String[m-1]);
             }
 
-        // si la cantidad de paginas es menor que los escritores entonces
-        }else{
-
-        // pensar en retornar esto
-            return new Respuesta(dias+1, new String[0], new String[0]);
-            /* if(mm*2 == n ){
-                int e = mm/mm*2
-            }else if(){
-
+            int i = 0, j =0,k=0,u=0;
+            if(escritor[i] - libros[j].paginas >= -5){
+                escritor[i] -= libros[j].paginas;
+                u=j;
+                j++;
+            }else{  
+                arr[i] = new EscritorP(k,u);
+                i++;
             }
-            int e = mm/  */
-
-        }
-        }
-        //return new Respuesta(0, new String[0], new String[0]);
+            if(j == m){  
+            return new Respuesta(dias, new String[0], new String[ultimolibro]);
+            }
+        } 
     }
 
     public static void main(String[]args){
@@ -119,21 +128,6 @@ public class PuntoB {
         output(r);
 
     }
-
-    /* Entrada de ejemplo
-5 10 (5 - Escritores // 10 - libros)
-
-Libro1 10
-Libro2 4
-Libro3 9
-Libro4 3
-Libro5 11
-Libro6 7
-Libro7 2
-Libro8 22
-Libro9 15
-Libro10 6
- */
 
     static class Entrada{
         int n;
