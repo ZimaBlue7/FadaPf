@@ -56,7 +56,7 @@ async function output(obj) {
  * para imprimir la solución al problema como se requiere en el enunciado.
  */
 async function solve(n, m, libros) {
-
+    
     return new Respuesta(0, [], []);
 }
 async function main() {
