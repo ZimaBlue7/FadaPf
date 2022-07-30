@@ -1,3 +1,4 @@
+const { Console } = require('console');
 let fs = require('fs');
 /**
  * Nombres de los archivos de lectura y escritura, modifique como considere.
@@ -51,13 +52,78 @@ async function output(obj) {
     });
 }
 
+async function EscritorP(primerLibro, ultimoLibro)
+    {
+        let primerLibro;
+        let ultimoLibro;
+            this.primerLibro = primerLibro;
+            this.ultimoLibro = ultimoLibro;
+    
+    }
+
 /**
  * Implementar el algoritmo y devolver un objeto de tipo Respuesta, el cual servirá
  * para imprimir la solución al problema como se requiere en el enunciado.
  */
 async function solve(n, m, libros) {
     
-    return new Respuesta(0, [], []);
+    let sumaPaginas = 0;
+    let dias = 0;
+    for (let f = 0; f < libros.length; f++) {
+        sumaPaginas += libros[f].paginas; // Suma de todas las paginas de los libros
+    }
+    let ppe = sumaPaginas / n; // paginas por escritor
+    let escritor = [];
+    let escritorPs = [];
+
+ 
+
+    for (let g = 0; g < n; g++) {
+        escritor[g] = ppe;
+    }
+
+    let diferencia = (sumaPaginas - ((ppe*n)-1));
+
+    let i = 0, j = 0, k = 0, u = 0;
+    console.log(sumaPaginas +": suma de paginas");
+    console.log(ppe +": paginas por escritor");
+    console.log(n +": cantidad escritores");
+    console.log(m +": cantidad libros");
+
+    while (true) {
+        console.log(i +": i ");
+        console.log(j +": j ");
+        
+        if(i == n-1){
+            if(j == m-1){             
+                escritorPs.push(new escritorP(k, u));
+            }
+            escritor[i] -= libros[j].paginas;
+            u = j;
+            j++;
+        }
+
+        if ((escritor[i] - libros[j].paginas >= -diferencia) && j!=m-1) {
+            escritor[i] -= libros[j].paginas;
+            u = j;
+            j++;
+            
+        } else {
+            escritorPs.push(new escritorP(k, u));
+            i++;
+            k = u;               
+        }
+        if (j == m - 1) {
+            const primerlibrito = [];
+            const ultimolibrito = [];
+            ultimolibrito = new String[n];
+            for (let l = 0; l < escritor.length; l++) {
+                primerlibrito[l] = Integer.toString(arr[l].primerLibro);
+                ultimolibrito[l] = Integer.toString(arr[l].ultimoLibro);
+            }
+            return new Respuesta(dias, primerlibrito, ultimolibrito);
+        }
+    }
 }
 async function main() {
     const inp = await input();
